@@ -13,23 +13,24 @@ class model_mysql
     }
 
     // Забираем данные
-    function get_info(){
+    function get_info($name=null){
         $mysqli = $this->connect();
-        $res = $mysqli->query("Select `name`, `info` from momo");
-        $res->data_seek(0);
-        $result = array();
-        while ($r = $res->fetch_assoc()){
-            $result[] = $r;
+
+        if(strlen($name)>0){
+            $res = $mysqli->query("Select `name`, `info`, `link`, `img` from momo where `name` = '$name'");
+            $result = $res->num_rows;
+            $mysqli->close();
+        }else{
+            $res = $mysqli->query("Select `name`, `info`, `link`, `img` from momo");
+            $res->data_seek(0);
+
+            while ($r = $res->fetch_assoc()){
+                $result[] = $r;
+            }
+            $mysqli->close();
         }
-        $mysqli->close();
+
         return $result;
-    }
-
-    function insert_info(){
-
-//        $mysqli = $this->connect();
-//        $mysqli->query("Insert into momo (`name`, `info`) VALUES ");
-//        $mysqli->close();
     }
 
     // YOUTUBE
@@ -53,5 +54,16 @@ class model_mysql
             $result[] = $r;
         }
         return $result;
+    }
+
+    function insert_game($name, $info){
+        $mysqli = $this->connect();
+        $name = htmlspecialchars($name);
+        $info = htmlspecialchars($info);
+        if($this->get_info($name) == 0){
+            $mysqli->query("Insert into momo(`name`, `info`) VALUES('$name', '$info')");
+        }
+
+
     }
 }

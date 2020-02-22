@@ -8,7 +8,7 @@
             <a href="/">Главная</a>
         </div>
         <div class="col">
-            <a href="#">Новости</a>
+            <a href="news.php">Новости</a>
         </div>
         <div class="col">
             <a href="#">О нас</a>
