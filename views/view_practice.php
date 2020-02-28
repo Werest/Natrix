@@ -20,3 +20,13 @@ echo $num ." ". $number ." ". $var;
 echo "<br>";
 
 //echo `ls -l`;
+echo intval('42');
+echo "<br>";
+echo intval(2.6);
+echo "<br>";
+
+class George{
+    function ha($x=100, $y=500){
+        return $x * $y;
+    }
+}
