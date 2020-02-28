@@ -15,7 +15,18 @@ echo "<br>";
 $x = 10;
 $x = $x < 0 ? 'Yes' : 'No';
 echo $x;
+echo '<hr>';
 
+//php 7 ??
+echo $a = $a ?? 999;
+echo $x = $x ?? "Jackie";
+echo '<hr>';
+
+$ar = [
+    'Танки' => ['Т34', 'БТ-2', 'Д2'],
+    'Насекомые' => ['Муха', 'Муравьи', 'Божья коровка']
+];
+print_r($ar);
 
 echo '</div>';
 require_once 'footer.php';
