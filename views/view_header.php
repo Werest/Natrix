@@ -11,6 +11,9 @@
             <a href="news.php">Новости</a>
         </div>
         <div class="col">
+            <a href="practice.php">Практика</a>
+        </div>
+        <div class="col">
             <a href="#">О нас</a>
         </div>
         <div class="col">
