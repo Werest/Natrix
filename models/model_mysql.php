@@ -33,6 +33,17 @@ class model_mysql
         return $result;
     }
 
+    function get_info_2(){
+        $mysqli = $this->connect();
+        $res = $mysqli->query("call lko.s_lko();");
+
+        while ($r = $res->fetch_assoc()){
+            $result[] = $r;
+        }
+        $mysqli->close();
+        return $result;
+    }
+
     // YOUTUBE
     function insert_youtube(){
         if(isset($_POST['link'])){

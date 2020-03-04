@@ -101,3 +101,44 @@ if(isset($_POST['title_game']) && isset($_POST['info'])) {
         <? } ?>
     </div>
 </div>
+    <hr>
+<div class="table-responsive-lg">
+<table class="table table-hover">
+    <thead>
+    <tr>
+        <th scope="col">#</th>
+        <th scope="col">Авиакомпания</th>
+        <th scope="col">Имя и Фамилия</th>
+        <th scope="col">Дата</th>
+        <th scope="col">Рейс</th>
+        <th scope="col">Откуда</th>
+        <th scope="col">Куда</th>
+        <th scope="col">Время вылета</th>
+        <th scope="col">Время прилета</th>
+    </tr>
+    </thead>
+<?php
+
+$j = $models_models->get_info_2();
+$i=1;
+foreach ($j as $r){
+?>
+<tbody>
+<tr>
+    <th scope="row"><?=$i?></th>
+    <td><?=$r['name']?></td>
+    <td><?=$r['fi']?></td>
+    <td><?=$r['date']?></td>
+    <td><?=$r['plane']?></td>
+    <td><b><?=$r['town_from']?></b></td>
+    <td><b><?=$r['town_to']?></b></td>
+    <td><?=$r['time_out']?></td>
+    <td><?=$r['time_in']?></td>
+</tr>
+</tbody>
+<?php
+    $i++;
+}
+?>
+    </table>
+</div>
