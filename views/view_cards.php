@@ -89,8 +89,10 @@ if(isset($_POST['title_game']) && isset($_POST['info'])) {
                                 echo '<img src="'. $img .'" alt="" class="img-fluid">';
                             }
                             ?>
-
-                            <p class="small">Ссылка: <a href="<?=$r['link']?>"><?=$r['link']?></a></p>
+                            <? if (strlen($r['link'])>0) {
+                                echo '<p class="small">Ссылка: <a href='. $r['link'] .'>' . $r['link'] . '</a></p>';
+                            }
+                            ?>
                         </div>
                         <div class="modal-footer">
                             <button type="button" class="btn btn-secondary" data-dismiss="modal">Закрыть</button>
@@ -110,7 +112,7 @@ if(isset($_POST['title_game']) && isset($_POST['info'])) {
         <th scope="col">Авиакомпания</th>
         <th scope="col">Имя и Фамилия</th>
         <th scope="col">Дата</th>
-        <th scope="col">Рейс</th>
+        <th scope="col">Тип самолёта</th>
         <th scope="col">Откуда</th>
         <th scope="col">Куда</th>
         <th scope="col">Время вылета</th>
@@ -120,7 +122,7 @@ if(isset($_POST['title_game']) && isset($_POST['info'])) {
 <?php
 
 $j = $models_models->get_info_2();
-$i=1;
+$i = 1;
 foreach ($j as $r){
 ?>
 <tbody>
