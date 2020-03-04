@@ -17,11 +17,11 @@ class model_mysql
         $mysqli = $this->connect();
 
         if(strlen($name)>0){
-            $res = $mysqli->query("Select `name`, `info`, `link`, `img` from momo where `name` = '$name'");
+            $res = $mysqli->query("call hvo.s_hvo_momo($name)");
             $result = $res->num_rows;
             $mysqli->close();
         }else{
-            $res = $mysqli->query("Select `name`, `info`, `link`, `img` from momo");
+            $res = $mysqli->query("call hvo.s_hvo_momo(NULL)");
             $res->data_seek(0);
 
             while ($r = $res->fetch_assoc()){
