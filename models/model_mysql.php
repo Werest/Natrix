@@ -17,11 +17,15 @@ class model_mysql
         $mysqli = $this->connect();
 
         if(strlen($name)>0){
+            $mysqli->begin_transaction(MYSQLI_TRANS_START_READ_ONLY);
             $res = $mysqli->query("call hvo.s_hvo_momo($name)");
+            $mysqli->commit();
             $result = $res->num_rows;
             $mysqli->close();
         }else{
+            $mysqli->begin_transaction(MYSQLI_TRANS_START_READ_ONLY);
             $res = $mysqli->query("call hvo.s_hvo_momo(NULL)");
+            $mysqli->commit();
             $res->data_seek(0);
 
             while ($r = $res->fetch_assoc()){
@@ -35,7 +39,9 @@ class model_mysql
 
     function get_info_2(){
         $mysqli = $this->connect();
+        $mysqli->begin_transaction(MYSQLI_TRANS_START_READ_ONLY);
         $res = $mysqli->query("call lko.s_lko();");
+        $mysqli->commit();
 
         while ($r = $res->fetch_assoc()){
             $result[] = $r;
@@ -49,8 +55,9 @@ class model_mysql
         if(isset($_POST['link'])){
             $mysqli = $this->connect();
             $link = htmlspecialchars($_POST['link']);
-
+            $mysqli->begin_transaction(MYSQLI_TRANS_START_READ_WRITE);
             $mysqli->query("Insert into links_youtube(`link`) VALUES('$link')");
+            $mysqli->commit();
 
             $_POST = null;
         }
@@ -72,7 +79,14 @@ class model_mysql
         $name = htmlspecialchars($name);
         $info = htmlspecialchars($info);
         if($this->get_info($name) == 0){
-            $mysqli->query("Insert into momo(`name`, `info`) VALUES('$name', '$info')");
+            try{
+                $mysqli->begin_transaction();
+                $mysqli->query("Insert into momo(`name`, `info`) VALUES('$name', '$info')");
+                $mysqli->commit();
+            }catch (Exception $e){
+                $mysqli->rollback();
+            }
+
         }
 
 
