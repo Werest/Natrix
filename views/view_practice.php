@@ -1,6 +1,5 @@
 
 <?php
-require_once 'view_pratice_bootstrap.php';
 
 $login = 'Hasb';
 $password = '2112';

@@ -28,5 +28,16 @@ $ar = [
 ];
 print_r($ar);
 
+echo '<hr>';
+$arr = 198;
+$p = str_split($arr);
+rsort($p);
+$p = (int)implode($p);
+var_dump($p);
+echo '<hr>';
+$p = str_split($arr);
+$re = array_sum($p);
+echo $re;
+
 echo '</div>';
 require_once 'footer.php';
