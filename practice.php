@@ -38,6 +38,15 @@ echo '<hr>';
 $p = str_split($arr);
 $re = array_sum($p);
 echo $re;
+echo '<hr>';
+$a_ = 5;
+$b_ = 1;
+
+$a_ = $a_ + $b_; // 6
+$b_ = $a_ - $b_; // 5
+$a_ = $a_ - $b_; // 1
+echo $a_ .'/'. $b_;
+
 
 echo '</div>';
 require_once 'footer.php';
