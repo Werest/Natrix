@@ -1,5 +1,5 @@
 create
-    definer = newuser@localhost procedure s_lko()
+    definer = newuser@localhost procedure s_lko.sql()
 begin
     select Passenger.name as fi,
            date,
