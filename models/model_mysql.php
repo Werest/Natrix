@@ -37,17 +37,23 @@ class model_mysql
         return $result;
     }
 
-    function get_info_2(){
+    function get_info_2($t1=null, $t2=null, $all=True){
         $mysqli = $this->connect();
         $mysqli->begin_transaction(MYSQLI_TRANS_START_READ_ONLY);
-        $res = $mysqli->query("call lko.s_lko();");
+        if ($all){
+            $res = $mysqli->query("call lko.s_lko();");
+        }else{
+            $res = $mysqli->query("call lko.s_lko_w($t1, $t2);");
+        }
+
         $mysqli->commit();
 
         while ($r = $res->fetch_assoc()){
             $result[] = $r;
         }
+        $n = $res->num_rows;
         $mysqli->close();
-        return $result;
+        return array($result, $n);
     }
 
     // YOUTUBE
